@@ -1,14 +1,23 @@
-import logging
+import importlib
 
-log = logging.getLogger()
-log.setLevel(logging.DEBUG)
+available_commands = ['Help', 'Query', 'Wiki']
 
 def lambda_handler(event, context):
     bot_event = event
-    command = bot_event['text']
-    print command
-    print(event)
-    log.debug(event)
+    command = bot_event['text'].title()
+
+    if command in available_commands:
+        command_class = getattr(importlib.import_module("src.commands"), command)
+        commandInstance = command_class()
+        response = commandInstance.execute()
+    else:
+        response = "Command %s does not exist" % command
+
     return {
-        'text': 'Your command: ' + bot_event['text']
+        'text': response
     }
+
+
+# event = {'text': 'help'}
+# context = {}
+# print lambda_handler(event, context)
