@@ -16,8 +16,3 @@ def lambda_handler(event, context):
     return {
         'text': response
     }
-
-
-# event = {'text': 'help'}
-# context = {}
-# print lambda_handler(event, context)

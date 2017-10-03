@@ -1,28 +1,32 @@
 
 # Slack AWS Lambda integration
 
-
- * Into your team slack search for `slash commands` app
+### Steps to configure your integration
+ * First of all, generate .zip file from this code that we'll deploy `zip -r ../slack-lambda.zip ./`
+ * Inside your slack team search for `slash commands` app
  * Example of search this app link: `https://<your-team>.slack.com/apps/search?q=slash+commands`
- * Install Slach Commands and choose your own command, eg `/mycommand`
+ * Install Slack Commands and choose your own command, eg `/mycommand`
  * Go to AWS console `https://console.aws.amazon.com/lambda/home` and create a Lambda function
- * Don't use blueprints, just click into `Author from scratch` button
- * The Step 2 of Lambda creation is about triggers that will invoke our lambda, don't do nothing, just click into `Next` button
- * The Step 3 is finally about our code, into `Basic information` type your own information and choose Python 2.7
- * Still into Step 3 copy `lambda.py` form this repository and paste there type your role of your preference
- * Click into create function
+ * Don't use blueprints, just click on `Author from scratch` button
+ * Into `Basic information` type your own information and click Create function
+ * Into Configuration select Python 3.6 as Runtime, choose `Upload a .ZIP file` and into Handle type main.lambda_handler which will call our entry function and finally upload our slack-lambda.zip
+ * Save and test our lambda, configure this simple body as test: `{"text": "help"}`
  * Now we must set up one API Gateway, navigate to `https://console.aws.amazon.com/apigateway/home`
  * Click into `Create API` button, type API name and go
  * Now into Select Option called `Actions` choose create method, choose POST
- * The POST - Setup is started, choose `Lambda Function` and regtion that you created your lambda
+ * The POST - Setup is started, choose `Lambda Function` and region that you created your lambda
  * Type the lambda name and move on
  * The POST - Method Execution is started, click into `Integration Request` title
  * Go to bottom of this page and Select `Body Mapping Templates`
  * Click into `Add mapping template` and type `application/x-www-form-urlencoded`
- * Insert the template code below into the text field for the template. This code converts a URL Encoded form post into JSON for your Lambda function to parse
- * Deploy API Gateway (you must create a stage)
+ * Insert the template code below into the text field for the template. This code converts a data Encoded form post into JSON for your Lambda function to parse, save it.
+ * Into Actions, deploy API Gateway (you must create a stage)
  * Get the url and put into slack integration settings
- * Update your lambda.py now and create commands as you want
+
+Now you have a structure to execute commands from Slack and you can do everything that you want.
+
+Enjoy
+
 
 #### Template API Gateway
 ```
