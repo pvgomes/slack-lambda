@@ -1,6 +1,8 @@
 
 # Slack AWS Lambda integration
 
+[![Build Status](https://travis-ci.org/pvgomes/slack-lambda.svg?branch=master)](https://travis-ci.org/pvgomes/slack-lambda)
+
 ### Steps to configure your integration
  * First of all, generate .zip file from this code that we'll deploy `zip -r ../slack-lambda.zip ./`
  * Inside your slack team search for `slash commands` app
