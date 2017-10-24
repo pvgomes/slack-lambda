@@ -20,10 +20,8 @@ class HelpTests(unittest.TestCase):
 
     def testHelper(self):
         helpCommand = commands.Help()
-        expected = '''
-            This is the help
-        '''
-        self.assertEqual(expected, helpCommand.execute(), "help msg is not the same")
+        expected = 'This is the help with argument query'
+        self.assertEqual(expected, helpCommand.execute('query'), "help msg is not the same")
 
 def main():
     unittest.main()
