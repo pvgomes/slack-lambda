@@ -1,4 +1,5 @@
 import importlib
+import os
 
 available_commands = ['Help', 'Query', 'Wiki']
 
@@ -17,5 +18,5 @@ def lambda_handler(event, context):
         response = "Command %s does not exist" % command
 
     return {
-        'text': response
+        'text': response + "environment value for key database_user " + os.environ['database_user']
     }
